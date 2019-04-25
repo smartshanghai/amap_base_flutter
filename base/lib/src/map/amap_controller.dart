@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:amap_base/amap_base.dart';
@@ -88,7 +89,7 @@ class AMapController {
   Future setLanguage(int language) {
     return _mapChannel.invokeMethod(
       'map#setLanguage',
-      {'language': language},
+      {'language': Platform.isIOS ? language : language == 0 ? 'zh_cn' : 'en'},
     );
   }
 
